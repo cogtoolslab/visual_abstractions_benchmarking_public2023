@@ -4,7 +4,6 @@ This repository contains code and materials to reproduce the results in our Neur
 
 [Paper](https://cogtoolslab.github.io/pdf/mukherjee_neurips_2023.pdf)📄\
 [Project Page](https://seva-benchmark.github.io/)🌐\
-
 [Reference Image pngs (from THINGS)](https://seva-benchmark.s3.us-west-2.amazonaws.com/things128_images.zip)🐱🚗🌯\
 [Sketch pngs](https://seva-benchmark.s3.us-west-2.amazonaws.com/seva_production_pngs.zip)✏️\
 [Sketch Metadata](https://seva-benchmark.s3.us-west-2.amazonaws.com/neurips_DB_human_clean.csv)💿\
