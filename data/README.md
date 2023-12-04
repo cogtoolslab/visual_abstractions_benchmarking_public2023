@@ -1,0 +1,1 @@
+This directory is where you can place data that serve as input to your analyses.

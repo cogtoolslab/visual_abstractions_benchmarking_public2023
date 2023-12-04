@@ -1,0 +1,264 @@
+/*
+ * CSS for jsPsych experiments.
+ *
+ * This stylesheet provides minimal styling to make jsPsych
+ * experiments look polished without any additional styles.
+ */
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+ @import url('https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,400,700,900');
+ 
+ /* Custom CSS */
+ #trialNum {
+   position: absolute;
+   bottom: 10%;
+   left: 50%;
+   font-size: 2vh;
+   pointer-events: none;
+   width: max-content;
+   transform: translate(-50%, -50%);
+ }
+ 
+ #leftside {
+   display: inline-block;
+   position: absolute;
+   top: 0px;
+   left: 17.5%;
+ }
+ 
+ #cue_container {
+   height: 300px;
+   width: 300px;
+   position: absolute;
+   top: 160px;
+   left: 100px;
+   margin: auto;
+   background: #ffffff;
+   border: solid 2px #999;
+   pointer-events: none;
+ }
+ 
+ #sketchpad_container {
+   height: 300px;
+   width: 300px;
+   position: relative;
+   top: 100px;
+   margin: auto;
+   background: #ffffff;
+   border: solid 2px #999;
+   display: inline-block;
+ }
+ 
+ #sketchpad {
+   /* height: 448px;
+     width: 448px; */
+   height: 100%;
+   width: 100%;
+   float: top;
+   margin: auto;
+   background: #ffffff;
+ }
+ 
+ #label_container {
+   width: 300px;
+   height: 40px;
+   position: absolute;
+   top: 20%;
+   left: 50%;
+   margin: auto;
+   padding: 0px;
+   pointer-events: none;
+   z-index: 3;
+   transform: translate(-50%, -50%);
+ }
+ 
+ #cue_label {
+   font-size: 5vh;
+   font-family: 'Roboto', 'Open Sans', sans-serif;
+   pointer-events: none;
+   margin: 0;
+ }
+ 
+ /* might need to add this thing */
+ #cue_html {
+   position: relative;
+   height: 100%;
+   width: 100%;
+ }
+ 
+ #submit_button {
+   font-size: 3.4vh;
+   font-family: 'Roboto', 'Open Sans', sans-serif;
+   width: 18.5vh;
+   position: absolute;
+   bottom: 18vh;
+   left: 50vw;
+   transform: translate(-50%, -50%);
+ }
+ 
+ button {
+   cursor: pointer;
+   padding: 1.35vh 1vw;
+   text-align: left;
+   font-size: 14px;
+   font-weight: 600;
+   border: solid#0D0F0B .3vh;
+   border-radius: 5px;
+   background: white;
+   font-weight: bold;
+   text-transform: uppercase;
+   letter-spacing: .15vh;
+   text-align: center;
+   border-radius: 3vh;
+ }
+ 
+ .green {
+   background: repeating-linear-gradient(135deg,
+       #39BE8B,
+       #39BE8B 4px,
+       #5FCAA0 4px,
+       #5FCAA0 8px);
+   -webkit-box-shadow: 4px 4px 0 #39BE8B;
+   box-shadow: .5vh .5vh 0 #39BE8B;
+ }
+ 
+ /* Container holding jsPsych content */
+ .jspsych-display-element {
+   display: flex;
+   flex-direction: column;
+   overflow-y: auto;
+ }
+ 
+ .jspsych-display-element:focus {
+   outline: none;
+ }
+ 
+ .jspsych-content-wrapper {
+   display: flex;
+   margin: auto;
+   flex: 1 1 100%;
+   width: 100%;
+ }
+ 
+ .jspsych-content {
+   font-family: 'Roboto', 'Open Sans', sans-serif;
+   font-size: 24px;
+   max-width: 95%;
+   /* this is mainly an IE 10-11 fix */
+   text-align: center;
+   margin: auto;
+   /* this is for overflowing content */
+ }
+ 
+ #demo_text {
+   text-align: left !important;
+ }
+ 
+ .jspsych-top {
+   align-items: flex-start;
+ }
+ 
+ .jspsych-middle {
+   align-items: center;
+ }
+ 
+ /* fonts and type */
+ .jspsych-display-element {
+   font-family: 'Roboto', 'Open Sans', sans-serif;
+   font-size: 3vh;
+   line-height: 1.6em;
+ }
+ 
+ /* Form elements like input fields and buttons */
+ .jspsych-display-element input[type="text"] {
+   font-family: 'Roboto', 'Open Sans', sans-serif;
+   font-size: 14px;
+ }
+ 
+ /* borrowing Bootstrap style for btn elements, but combining styles a bit */
+ .jspsych-btn {
+   display: inline-block;
+   padding: 6px 12px;
+   margin: 0px;
+   font-size: 14px;
+   font-weight: 400;
+   font-family: 'Open Sans', 'Arial', sans-serif;
+   cursor: pointer;
+   line-height: 1.4;
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: middle;
+   background-image: none;
+   border: 1px solid transparent;
+   border-radius: 4px;
+   color: #333;
+   background-color: #fff;
+   border-color: #ccc;
+ }
+ 
+ .jspsych-btn:hover {
+   background-color: #ddd;
+   border-color: #aaa;
+ }
+ 
+ .jspsych-btn:disabled {
+   background-color: #eee;
+   color: #aaa;
+   border-color: #ccc;
+   cursor: not-allowed;
+ }
+ 
+ /* jsPsych progress bar */
+ #jspsych-progressbar-container {
+   color: #555;
+   border-bottom: 1px solid #dedede;
+   background-color: #f9f9f9;
+   margin-bottom: 3.5vh;
+   text-align: center;
+   padding: 1vh 0px;
+   width: 100%;
+   line-height: 3.5vh;
+ }
+ 
+ #jspsych-progressbar-container span {
+   font-size: .9vw;
+   padding-right: .9vw;
+ }
+ 
+ #jspsych-progressbar-outer {
+   background-color: #eee;
+   width: 50%;
+   margin: auto;
+   height: 2vh;
+   display: inline-block;
+   vertical-align: middle;
+   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+ }
+ 
+ #jspsych-progressbar-inner {
+   background-color: #aaa;
+   width: 0%;
+   height: 100%;
+ }
+ 
+ /* Control appearance of jsPsych.data.displayData() */
+ #jspsych-data-display {
+   text-align: left;
+ }
+ 
+ .centered {
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+ }
+
+#left_text {
+  text-align: left !important;
+}
+
+#devMode_text {
+  position: fixed;
+  top: 6%;
+  left: 1%;
+}
+

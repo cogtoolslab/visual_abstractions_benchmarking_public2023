@@ -1,0 +1,33 @@
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+.jspsych-display-element {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.ui-dialog-titlebar-close {
+  display: none;
+}
+
+.ui-widget-header {
+  padding: 0.2em;
+}
+
+#sketchpad-canvas {
+  /* border: blue 2px solid !important; */
+  width: 500px
+}
+
+#photo-prompt{
+  margin-right: 20px;
+  height: 500px;
+  border: 2px black solid;
+}
+
+.example_video{
+  border: 2px solid gray;
+  padding: 30px;
+}

@@ -1,0 +1,158 @@
+---
+title: "neurips_DB"
+author: "Kushin Mukherjee"
+date: "2023-06-06"
+output: html_document
+---
+```{r}
+library(tidyverse)
+library(utils)
+library(lme4)
+library(lmerTest)
+library(data.table)
+```
+
+```{r}
+human_sketch_df<- read.table('../data/human_sketches_R_df.csv',sep=',',header=TRUE)
+snp_df<- read.table('../data/snp_R_df.csv',sep=',',header=TRUE)
+```
+
+```{r}
+
+
+h_df<- human_sketch_df%>%subset(model=='human')
+h_df$abstraction_c <- (h_df$abstraction - mean(h_df$abstraction))/sd(h_df$abstraction )
+
+nh_df<- human_sketch_df%>%subset(model!='human')
+nh_df$abstraction_c <- (nh_df$abstraction - mean(nh_df$abstraction))/sd(nh_df$abstraction )
+
+
+nh_df$human_entropy<-rep(h_df$entropy,times = 17)
+nh_df$human_accuracy<-rep(h_df$mean_top1_accuracy,times = 17)
+
+
+snp_h_df<- snp_df%>%subset(model=='human')
+snp_h_df$abstraction_c<-(snp_h_df$abstraction - mean(snp_h_df$abstraction))/sd(snp_h_df$abstraction )
+
+snp_nh_df<- snp_df%>%subset(model!='human')
+snp_nh_df$abstraction_c<-(snp_nh_df$abstraction - mean(snp_nh_df$abstraction))/sd(snp_nh_df$abstraction )
+
+snp_nh_df$human_auc<-rep(snp_h_df$auc,times = 17)
+
+```
+
+## Humans produce more detailed sketches under less stringent time constraints.
+
+```{r}
+stroke_complexity_m<- lmer(num_strokes~abstraction +(1+abstraction|concept),data=h_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+
+summary(stroke_complexity_m)
+```
+
+
+## Time constraints on sketch production impact sketch understanding
+
+
+### recognition accuracy
+```{r}
+
+### vision models
+acc_v_dd_full<-  lmer(mean_top1_accuracy~ abstraction_c+ model+ (1+abstraction_c|concept), data=nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+acc_v_dd_sub<-  lmer(mean_top1_accuracy~ abstraction_c+ (1+abstraction_c|concept), data=nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+
+
+summary(acc_v_dd_full)
+anova(acc_v_dd_full,acc_v_dd_sub)
+
+
+### humans
+acc_v_dd_human<-lmer(mean_top1_accuracy~ abstraction_c+ (1+abstraction_c|concept), data=h_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+   
+summary(acc_v_dd_human)
+
+
+```
+
+### soft label distibution entropy
+
+```{r}
+
+### vision models
+H_v_dd_full<-  lmer(entropy~ abstraction_c+ model+ (1+abstraction_c|concept), data=nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+H_v_dd_sub<-  lmer(entropy~ abstraction_c+ (1+abstraction_c|concept), data=nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+
+
+summary(H_v_dd_full)
+anova(H_v_dd_full,H_v_dd_sub)
+
+
+### humans
+H_v_dd_human<-lmer(entropy~ abstraction_c+ (1+abstraction_c|concept), data=h_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+   
+summary(H_v_dd_human)
+
+
+```
+
+### semantic neighbor preference
+```{r}
+
+### vision models
+snp_v_dd_full<-  lmer(auc~ abstraction_c+ model+ (1+abstraction_c|concept), data=snp_nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+snp_v_dd_sub<-  lmer(auc~ abstraction_c+ (1+abstraction_c|concept), data=snp_nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+
+
+summary(snp_v_dd_full)
+anova(snp_v_dd_full,snp_v_dd_sub)
+
+
+### humans
+snp_v_dd_human<-lmer(auc~ abstraction_c+ (1+abstraction_c|concept), data=snp_h_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+   
+summary(snp_v_dd_human)
+
+
+```
+
+## Vision models vary in their degree of consistency with human recognition performance and response patterns.
+
+### recognition accuracy alignment
+
+```{r}
+nh_df_grouped<-nh_df%>%group_by(concept,abstraction,model)%>%summarize(mean_top1_accuracy=mean(mean_top1_accuracy),
+                                                      human_accuracy=mean(human_accuracy),
+                                                      entropy=mean(entropy),
+                                                      human_entropy=mean(human_entropy))
+
+nh_df_grouped$abstraction_c<-(nh_df_grouped$abstraction-mean(nh_df_grouped$abstraction))/sd(nh_df_grouped$abstraction)
+
+
+
+
+acc_aligment_full<-lmer(human_accuracy~ mean_top1_accuracy*abstraction_c+ model+ (1+mean_top1_accuracy*abstraction_c|concept), data=nh_df_grouped)
+acc_aligment_sub<- lmer(human_accuracy~ mean_top1_accuracy*abstraction_c+(1+mean_top1_accuracy*abstraction_c|concept), data=nh_df_grouped)
+summary(acc_aligment_full)
+anova(acc_aligment_full,acc_aligment_sub)
+```
+
+### entropy aligment
+
+```{r}
+
+H_aligment_full<-lmer(human_entropy~ entropy*abstraction_c+ model+ (1+entropy*abstraction_c||concept), data=nh_df_grouped)
+H_aligment_sub<- lmer(human_entropy~ entropy*abstraction_c+(1+entropy*abstraction_c||concept), data=nh_df_grouped)
+summary(H_aligment_full)
+anova(H_aligment_full,H_aligment_sub)
+```
+
+### snp alignment
+```{r}
+snp_aligment_full<-lmer(human_auc~ auc*abstraction_c+ model+ (1+auc*abstraction_c|concept), data=snp_nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+snp_aligment_sub<- lmer(human_auc~ auc*abstraction_c+(1+auc*abstraction_c|concept), data=snp_nh_df,control=lmerControl(optimizer="bobyqa",optCtrl=list(maxfun=20000)))
+summary(snp_aligment_full)
+anova(snp_aligment_full,snp_aligment_sub)
+```
+
+
+
+

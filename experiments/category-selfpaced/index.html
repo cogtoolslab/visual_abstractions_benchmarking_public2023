@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<!-- https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
+<link rel="shortcut icon" href="">
+<link rel="shortcut icon" href="#">
+<title>thingsdraw128</title>
+
+<head>
+  <script type="text/javascript" src="js/socket.io.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+  <!-- JsPsych -->
+  <script src="js/jspsych.js"></script>
+  <script src="js/plugin-browser-check.js"></script>
+  <script src="js/plugin-call-function.js"></script>
+  <script src="js/plugin-fullscreen.js"></script>
+  <script src="js/plugin-instructions.js"></script>
+  <script src="js/plugin-survey-multi-choice.js"></script>
+  <script src="js/plugin-survey-multi-select.js"></script>
+  <script src="js/plugin-survey-multi-choice-custom.js"></script>
+  <script src="js/plugin-html-keyboard-response.js"></script>
+  <script src="js/plugin-sketchpad.js"></script>
+  <script src="js/plugin-browser-check.js"></script>
+  <script src="js/plugin-survey-text.js"></script>
+  <script src="js/plugin-survey-text-custom.js"></script>
+  <script src="js/plugin-survey.js"></script>
+  <script src="js/plugin-preload.js"></script>
+  <script type="text/javascript" src="js/setup.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css">
+  <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.1/css/survey.css">
+  <link href="jspsych.css" rel="stylesheet">
+  <link href="custom.css" rel="stylesheet">
+
+  <script type="text/javascript">
+    socket = io.connect();
+
+    window.onbeforeunload = function() {
+      return "Please do not refresh the page or go back. Progress that you have made may not be saved!";
+    };
+
+    window.onload = function() {
+      setupGame();
+    };
+  </script>
+
+</head>
+
+<body style="font-family: Lato, 'sans-serif'"></body>
+
+</html>

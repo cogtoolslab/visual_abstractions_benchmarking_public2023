@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="shortcut icon" href="">
+<link rel="shortcut icon" href="#">
+<head>
+  <script></script>
+  <script src="js/socket.io.js"></script>
+  <script src="js/jspsych.js"></script>
+  <script src="js/plugin-instructions.js"></script>
+  <script src="js/plugin-preload.js"></script>
+  <script src="js/lodash.min.js"></script>
+  <script src="js/plugin-html-keyboard-response.js"></script>
+  <script src="js/plugin-sketch-label.js"></script>
+  <script src="js/plugin-survey-multi-choice.js"></script>
+  <script src="js/plugin-fullscreen.js"></script>
+  <script src="js/plugin-browser-check.js"></script>
+  <script src="js/plugin-survey.js"></script>
+  <script src="js/setup.js"></script>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.1/css/survey.css">
+  <link rel="stylesheet" href="./jspsych.css">
+  <script>
+    window.onload = function () {
+      setupGame();
+
+      fetch('https://vab-recog.s3.us-west-2.amazonaws.com/things1854.json')
+      .then(response => response.json())
+      .then(data => {
+        var things1854 = data; // do something with the JSON data
+        console.log('things loaded');
+      })
+      .catch(error => {
+        console.error('Error fetching JSON:', error);
+  });
+    }
+  </script>
+</head>
+
+<body>
+  <div id="display-area">
+
+  </div>
+</body>
+
+</html>

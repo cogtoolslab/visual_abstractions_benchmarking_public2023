@@ -1,0 +1,18 @@
+.fixedHeight {
+  color:red;
+  font-size:10px;
+  max-height: 150px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+#search {
+  display: flex;
+  justify-content: center;
+}
+
+.example_video{
+  border: 2px solid gray;
+  padding: 30px;
+}
