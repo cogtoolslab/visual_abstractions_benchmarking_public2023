@@ -1,8 +1,11 @@
 # SEVA: Leveraging Sketches to Evaluate Alignment Between Human and Machine Visual Abstraction
 
-This repository contains code to reproduce the results in our NeurIPS 2023 Datasets and Benchmarks submission, SEVA: Leveraging Sketches to Evaluate Alignment Between Human and Machine Visual Abstraction.
+This repository contains code and materials to reproduce the results in our NeurIPS 2023 Datasets and Benchmarks paper, **SEVA: Leveraging Sketches to Evaluate Alignment Between Human and Machine Visual Abstraction**.
 
-Global Directory Structure
+(Paper)[https://cogtoolslab.github.io/pdf/mukherjee_neurips_2023.pdf]📄
+(Project Page)[https://seva-benchmark.github.io/]🌐
+
+Below is an overview of the structure of this repository. Refer below for brief descriptions.
 
 ```bash
 ├── analysis
@@ -14,8 +17,8 @@ Global Directory Structure
 ├── data
 
 ```
-`analysis` contains 3 main files -
-1. `analysis_nb.ipynb` is a jupyter notebook that contains code to reproduce the results we present in our submission with headers corresponding to the differnet sections in the paper.
+`analysis` contains 3 files -
+1. `analysis_nb.ipynb` is a jupyter notebook that contains code to reproduce the paper's main results with headers corresponding to sections in the paper.
 2. `neurips_DB.Rmd` is an R markdown notebook that contains additional analyses, specifically the results of mixed-effects models.
 3. `sketch_models.yml` specifies a conda environment with the appropriate packages to reproduce our code. We recommend creating a new conda environment using the following command:
    
